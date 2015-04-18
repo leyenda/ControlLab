@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/Chart.js/Chart.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<link rel="stylesheet" type="text/css" href="/estilos.css"
+    </head>
+    <body>
+        <canvas id="myChart" width="700" height="400"></canvas>
+        <div class="panel">
+        <form id="target">
+            <input type="text" placeholder="Valor">
+	    <a href="#" id="inicio" class="button">Inicio</a>
+	    <a href="#" id="Stop" class="button">Stop</a>
+        </form>
+        </div>
+    <script type="text/javascript">
+	$('#myChart').attr('width',$(window).width()- 20);
+        //manejo de eventos
+        //init zeropoints
+        var npoints = 30; //numero de puntos graficados
+        var points = Array.apply(null, new Array(npoints)).map(Number.prototype.valueOf,0);
+        var pointsE = Array.apply(null, new Array(npoints)).map(Number.prototype.valueOf,0);
+        var resetLabels = Array.apply(null, new Array(npoints)).map(function(x,y){return (y-29);});
+        var labels = Array.apply(null, new Array(npoints)).map(function(x,y){return (y-29);});
+
+
+        var data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(255,20,20,0.2)",
+                    strokeColor: "rgba(255,20,20,1)",
+                    pointColor: "rgba(255,20,20,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,205,1)",
+                    data: points
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: pointsE
+                }
+            ]
+        };
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myLineChart = new Chart(ctx).Line(data,
+            {
+                animation: false,
+                showTooltips: false,
+                scaleOverride: true,
+                scaleSteps: 10,
+                scaleStepWidth: 10,
+                scaleStartValue: 0,
+                bezierCurve : true,
+                bezierCurveTension : 0.2,
+                pointDot : false,
+
+            });
+
+        var socket = io();
+
+	$('#inicio').click(function(event){
+	event.preventDefault();
+	socket.emit('OrdenIni');
+	myLineChart.scale.xLabels = resetLabels;
+	});
+
+	$('#Stop').click(function(event){
+	event.preventDefault();
+	socket.emit('OrdenStop');
+	});
+
+        var cadena = "";
+        $( "#target" ).submit(function( event ) {
+          var str =  $("form input:text").val();
+          if ((str != "") && (str>=0) && (str<=100) && (str != cadena)) {
+              socket.emit('Cescalon',{escalon :  str});
+              cadena = str;
+          }else{
+              console.log('Warning! No cumple con las condiciones.')
+          }
+          event.preventDefault();
+        });
+
+
+        socket.on('puntos', function(data){
+        	//data es un punto
+        	//reordeno el arreglo anterior de datos como ultimo valor el recibido.
+        	myLineChart.scale.xLabels = myLineChart.scale.xLabels.map(function(x,y){return x+1})
+            for (var i = 0; i < (npoints-1) ;i++ ) {
+                myLineChart.datasets[1].points[i].value = myLineChart.datasets[1].points[i+1].value;
+                myLineChart.datasets[0].points[i].value = myLineChart.datasets[0].points[i+1].value;
+            }
+            	myLineChart.datasets[1].points[npoints-1].value = data.point;
+            	myLineChart.datasets[0].points[npoints-1].value = data.pointE;
+            myLineChart.update();
+        });
+
+    </script>
+    </body>
+</html>
