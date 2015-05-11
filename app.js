@@ -1,11 +1,5 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var pcduino = require("pcduino");
-var digital = pcduino.digital;
-var analog = pcduino.analog;
-var fs =require('fs');
+
+
 
 
 ////////////////////////////VARIABLES GLOBALES
@@ -32,10 +26,8 @@ function escribir(dir,data){
 		if(err) throw err;
 	});
 }
-escribir("/sys/devices/virtual/misc/gpio/mode/gpio5","2");
-escribir("/sys/devices/virtual/misc/pwmtimer/enable/pwm5","1");
-escribir("/sys/devices/virtual/misc/pwmtimer/level/pwm5","0");
-app.use(express.static(__dirname + '/bower_components'));
+
+
 
 
 //Server Config
@@ -44,50 +36,31 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
-  socket.on('Cescalon', function(data){
-    console.log("Escalon aproximado: "+Math.round(data.escalon*0.033*100)/100 + " [V]");
-    ee = data.escalon; 
-    desfase = aux2;
-    Besc = Math.round(data.escalon*2);
-    writePin(Besc);
-  });
-  socket.on('OrdenIni', function(){
-    detener = false;
-    d = new Date();
-    name = "datos/"+d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear()+ "_" + d.getHours()+ "-" +d.getMinutes()+d.getSeconds()+'.txt';
-    cadena ="";
-    grafSend=0;
-    tomadato(0);
-  });
-  socket.on('OrdenStop', function(){
-    detener = true;
-  });
-});
+
 
 var step = 10; // 10 milisegundos
 
 function tomadato(i){
   setTimeout(function(){
-    
+
 	grafSend++;
 	punto = analog.analogRead(5);
 	punto = (punto*100)/4095;
 	cadena += i/100 + '\t ' + ee + '\t ' + punto + '\n';  //tiempo en s, escalon, signal
 	if(grafSend>99){ //99
 	fs.appendFile(name, cadena ,function(err){if(err){throw err;}});
-	cadena="";	
+	cadena="";
 	grafSend=0;
 	//console.log(punto);
-	io.emit('puntos', { point : punto , pointE : ee});	
-	}	
+	io.emit('puntos', { point : punto , pointE : ee});
+	}
 	//run here
         //[2-10] => [0-3.3] => [0-4096];
         /*
         aux=analog.analogRead(2); //CUIDADO CON EL PIN [0-1] Reciben menos de 3.3V
 	aux=(aux*100)/4096;
         vector.push(aux);
-   
+
         if (i>comparacion) {
         if ((vector[i] - vector[i-comparacion] < errorsalida) && (vector[i] - ee[cont] > 0.05)) {
         ee.push(vector[i]);
@@ -108,7 +81,7 @@ function tomadato(i){
         console.log("k= " +k+ " Tp= " +Tp+ " Theta= " +Theta)
         }
         }
-        
+
         aux2=i;
         */
 
@@ -128,10 +101,3 @@ http.listen(process.env.PORT || 3000, process.env.IP || IP, function(){
 function writePin(Bescalon){
   escribir("/sys/devices/virtual/misc/pwmtimer/level/pwm5",Bescalon);
 }
-
-
-/*TODO
-vector auxiliar para graficar cada 1 segundo
-http://tronixstuff.com/2011/10/22/tutorial-arduino-port-manipulation/
-*/
-
