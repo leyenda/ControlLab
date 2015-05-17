@@ -10,7 +10,8 @@ var control = require('./Control');
 
 config = {
    server_IP : "192.168.1.100",
-   step : 500,
+   step : 10,
+   writeTime : 1000,
    renameData : true,
    autoStart : false
 };

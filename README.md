@@ -12,6 +12,21 @@ Alguna idea para mejorar el codigo?
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/leyenda/ControlLab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 ##TODO
-- [x] Crear char Gitter
+- [x] Crear chat Gitter
 - [ ] Completar HMI
+  - [ ]Iniciar
+  - [ ]Detener
+  - [ ]Lazo abierto
+    - [ ]Input escalon
+    - [ ]Enviar Cambio
+  - [ ]lazo cerrado
+    - [ ]seleccion Controlador
+  - [x]Leyenda
+    - [x]Lineas
+      - [x]Escalon actual
+      - [x]Respuesta
+    - [x]constantes del controlador
+  - [ ]Configuracion
+    + [ ]Tiempo de muestreo (ms)
+    + [ ]Tiempo de escritura y graficacion (ms)
 - [ ] Implementacion algoritmo PID

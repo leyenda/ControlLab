@@ -22,10 +22,10 @@ function controlador(config){
   this.fileName = "";
   this.toGraph = {};
   this.iteration = 0;
+  this.writeTime = Math.round(config.writeTime/this.step)-1;
 ////////////
 //Metodos //
 ////////////
-
   this.escribir = function(dir,data){
     fs.writeFile(dir,data,function(err){
       if(err) throw err;
@@ -42,12 +42,12 @@ function controlador(config){
       this.timeSend++;
       //medPercent = (analog.analogRead(5)*100)/4095;
       //parseData += iteration/100 + '\t ' + escalon + '\t ' + medPercent + '\n';
-      if (this.timeSend > 0) {
+      if (this.timeSend > this.writeTime) {
         this.escribir(this.fileName,this.parseData);
         this.toGraph = {point : medPercent , pointE : this.escalon};
         this.iteration += 1;
         parseData = "";
-        timeSend = 0;
+        this.timeSend = 0;
       }
   };
 
