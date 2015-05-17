@@ -24,9 +24,9 @@ var controlador = new control(config);
 function run(){
   controlador.running = true;
   setTimeout(function(){
-    console.info(controlador.iteration);
-    controlador.tomaDato(controlador.iteration);
-    io.emit('puntos',controlador.toGraph);
+    controlador.tomaDato(function(){
+      io.emit('puntos',controlador.toGraph);
+    });
     if (controlador.running) {
       run();
     }

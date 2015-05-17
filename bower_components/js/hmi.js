@@ -67,19 +67,43 @@ var myLineChart = new Chart(ctx).Line(data, {
 var socket = io();
 
 $('#inicio').click(function (event) {
-  event.preventDefault();
-  socket.emit('OrdenIni');
-  myLineChart.scale.xLabels = resetLabels;
+  var state = $('#inicio>span').text();
+  if(state == 'Inicio'){
+    event.preventDefault();
+    socket.emit('OrdenIni');
+    myLineChart.scale.xLabels = resetLabels;
+    $('#inicio>span').text('Parar');
+    $('#inicio>img').attr('src', 'img/icons/icon_146.svg');
+    $(this).toggleClass('stop');
+  }else{
+    socket.emit('OrdenStop');
+    $('#inicio>span').text('Inicio');
+    $('#inicio>img').attr('src', 'img/icons/icon_145.svg');
+    $(this).toggleClass('stop');
+  }
 });
 
-$('#Stop').click(function (event) {
-  event.preventDefault();
-  socket.emit('OrdenStop');
+$(".lazoSel").click(function(){
+  var mySpan = $(this).children('.lazo');
+  var selector = $(this);
+  if(mySpan.attr('name') == 'abierto'){
+    mySpan.attr('name','cerrado');
+    mySpan.text('Lazo cerrado');
+    selector.siblings('.abierto').slideToggle(200,function(){
+      selector.siblings('.cerrado').slideToggle(200);
+    });
+  }else{
+    mySpan.attr('name','abierto');
+    mySpan.text('Lazo abierto');
+    selector.siblings('.cerrado').slideToggle(200,function(){
+      selector.siblings('.abierto').slideToggle(200);
+    });
+  }
 });
 
 var cadena = "";
-$("#target").submit(function (event) {
-  var str = $("form input:text").val();
+$(".sendA").click(function (event) {
+  var str = $(".abierto>input:text").val();
   if ((str !== "") && (str >= 0) && (str <= 100) && (str != cadena)) {
     socket.emit('Cescalon', {
       escalon: str

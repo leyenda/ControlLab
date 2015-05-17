@@ -14,11 +14,11 @@ Alguna idea para mejorar el codigo?
 ##TODO
 - [x] Crear chat Gitter
 - [ ] Completar HMI
-  - [ ] Iniciar
-  - [ ] Detener
-  - [ ] Lazo abierto
-    - [ ] Input escalon
-    - [ ] Enviar Cambio
+  - [x] Iniciar
+  - [x] Detener
+  - [x] Lazo abierto
+    - [x] Input escalon
+    - [x] Enviar Cambio
   - [ ] lazo cerrado
     - [ ] seleccion Controlador
   - [x] Leyenda

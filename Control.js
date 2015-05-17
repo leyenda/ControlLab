@@ -38,13 +38,14 @@ function controlador(config){
 //    escribir("/sys/devices/virtual/misc/pwmtimer/level/pwm5","0");
 //  };
 
-  this.tomaDato = function(){
+  this.tomaDato = function(callback){
       this.timeSend++;
       //medPercent = (analog.analogRead(5)*100)/4095;
-      //parseData += iteration/100 + '\t ' + escalon + '\t ' + medPercent + '\n';
+      //parseData += iteration + '\t ' + escalon + '\t ' + medPercent + '\n';
       if (this.timeSend > this.writeTime) {
         this.escribir(this.fileName,this.parseData);
         this.toGraph = {point : medPercent , pointE : this.escalon};
+        callback();
         this.iteration += 1;
         parseData = "";
         this.timeSend = 0;
