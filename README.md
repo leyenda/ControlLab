@@ -13,7 +13,7 @@ Alguna idea para mejorar el codigo?
 
 ##TODO
 - [x] Crear chat Gitter
----
+
 - [ ] Completar HMI
 - [ ]Iniciar
 - [ ]Detener
@@ -22,15 +22,15 @@ Alguna idea para mejorar el codigo?
 - [ ]Enviar Cambio
 - [ ]lazo cerrado
 - [ ]seleccion Controlador
----
+
 - [x]Leyenda
 - [x]Lineas
 - [x]Escalon actual
 - [x]Respuesta
 - [x]constantes del controlador
----
+
 - [ ]Configuracion
 - [ ]Tiempo de muestreo (ms)
 - [ ]Tiempo de escritura y graficacion (ms)
----
+
 - [ ] Implementacion algoritmo PID
