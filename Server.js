@@ -47,6 +47,9 @@ io.on('connection', function(socket){
   socket.on('Cescalon', function(data){
     console.info("Cambio en escalon " + data.escalon);
     controlador.escalon = data.escalon;
+    if(data.metodo !== null){
+      console.info("Metodo:" + data.metodo);
+    }
     //controlador.pwm();
   });
   socket.on('OrdenIni', function(){

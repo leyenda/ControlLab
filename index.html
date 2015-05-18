@@ -3,11 +3,13 @@
 
 <head>
   <script src="/Chart.js/Chart.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="jquery/dist/jquery.min.js"></script>
+  <script src="jquery-colorbox/jquery.colorbox-min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="js/hmi.js" charset="utf-8"></script>
   <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="css/estilos.css">
+  <link rel="stylesheet" type="text/css" href="css/colorbox.css">
 </head>
 
 <body>
@@ -39,8 +41,8 @@
       <ul>
         <li>
           <a href="#" id="inicio" class="funcion inicio">
-            <img src="img/icons/icon_145.svg" alt="Inicio">
-            <span>Inicio</span>
+            <i class="iconInicio initAnimate"></i>
+            <span class="special">Inicio</span>
           </a>
         </li>
         <li class="lazoli">
@@ -51,25 +53,29 @@
           <div class="menu abierto">
             <label for="escalon">Escalon: </label>
             <input type="text" name="escalon" placeholder="Valor">
-            <a href="#" class="sendA">
+            <a href="#" id="escalon" class="send">
             <img src="img/icons/icon_053.svg" alt="Send">
             <span>Enviar</span>
             </a>
           </div>
           <div class="menu cerrado">
             <label for="metodo">Metodo: </label>
+            <label class="flecha">
             <select name="Metodo">
-            <option value="sintesis">Sintesis Directa</option>
+            <option value="sintesis" selected>Sintesis Directa</option>
             <option value="integral">Integral del Error</option>
             </select>
-            <a href="#" class="sendA">
+            </label>
+            <label for="referencia">Referencia: </label>
+            <input type="text" name="referecia" placeholder="Valor">
+            <a href="#" id="referencia" class="send">
             <img src="img/icons/icon_053.svg" alt="Send">
             <span>Enviar</span>
             </a>
           </div>
         </li>
         <li>
-          <a href="#" class="funcion config">
+          <a class='inline' href="#inline_content">
             <img src="img/icons/icon_186.svg" alt="Config">
             <span>Configurar</span>
           </a>
@@ -105,13 +111,16 @@
     </div>
     <canvas id="myChart" width="700" height="400" style="display:block"></canvas>
   </div>
-  <!--         <div class="panel">
-<form id="target">
-    <input type="text" placeholder="Valor">
-      <a href="#" id="inicio" class="button">Inicio</a>
-      <a href="#" id="Stop" class="button">Stop</a>
-</form>
-</div> -->
+  <div style='display:none'>
+			<div id='inline_content' style='padding:10px; background:#fff;'>
+			<p>Aqui estara el formulario de configuraciion:</p>
+      <ul style="color:#000">
+        <li>Tiempo de muestreo</li>
+        <li>Tiempo de escritura</li>
+        <li>Renombrar Base de datos</li>
+      </ul>
+			</div>
+		</div>
 </body>
 
 </html>

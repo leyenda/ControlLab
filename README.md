@@ -19,8 +19,8 @@ Alguna idea para mejorar el codigo?
   - [x] Lazo abierto
     - [x] Input escalon
     - [x] Enviar Cambio
-  - [ ] lazo cerrado
-    - [ ] seleccion Controlador
+  - [x] lazo cerrado
+    - [x] seleccion Controlador
   - [x] Leyenda
     - [x] Lineas
       - [x] Escalon actual
@@ -29,4 +29,5 @@ Alguna idea para mejorar el codigo?
   - [ ] Configuracion
     - [ ] Tiempo de muestreo (ms)
     - [ ] Tiempo de escritura y graficacion (ms)
+    - [ ] Renombrar Base de datos
 - [ ] Implementacion algoritmo PID

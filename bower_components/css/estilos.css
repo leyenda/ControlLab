@@ -3,87 +3,6 @@ body{
 	font-family: 'Inconsolata';
 }
 
-.button {
-	background-color:#3bb3e0;
-	padding:10px;
-	position:relative;
-	font-family: 'Open Sans', sans-serif;
-	font-size:12px;
-	text-decoration:none;
-	color:#fff;
-	background-image: linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, rgb(44,160,202)),
-	color-stop(1, rgb(62,184,229))
-	);
-	-webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
-	-moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
-	-o-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
-	box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.button::before {
-	background-color:#072239;
-	content:"";
-	display:block;
-	position:absolute;
-	width:100%;
-	height:100%;
-	padding-left:2px;
-	padding-right:2px;
-	padding-bottom:4px;
-	left:-2px;
-	top:5px;
-	z-index:-1;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	-o-border-radius: 6px;
-	border-radius: 6px;
-	-webkit-box-shadow: 0px 1px 0px #fff;
-	-moz-box-shadow: 0px 1px 0px #fff;
-	-o-box-shadow: 0px 1px 0px #fff;
-	box-shadow: 0px 1px 0px #fff;
-}
-
-.button:active {
-	color:#156785;
-	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
-	background:rgb(44,160,202);
-	-webkit-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
-	-moz-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
-	-o-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
-	box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
-	top:7px;
-}
-
-.button:active::before {
-	top:-2px;
-}
-
-button{outline:0
-	background:none;
-	margin:0;
-	padding:0;
-	border:0;
-}
-
-.panel{
-	display:block;
-	margin: 0 auto;
-	width: 300px;
-}
-
 /*Nav*/
 .nav {
 	position: absolute;
@@ -94,7 +13,7 @@ button{outline:0
 .nav2 {
 	display: inline-block;
 	width: 150px;
-	margin-left: 385px;
+	margin-left: 390px;
 }
 
 .nav ul li{
@@ -108,30 +27,87 @@ button{outline:0
 
 .nav ul li span{
 	display:inline-block;
-	line-height:10px;
 	padding-right: 15px;
+	height: 30px;
 }
 
 .nav ul li a{
 	display:block;
+	height: 30px;
 	text-decoration: none;
 	color: #fff;
 }
 
-.nav ul li a:not(.sendA):hover{
+.nav ul li a:not(.send):hover{
 	background: rgba(255,255,255,0.2);
 	border-bottom: solid rgba(255,255,255,1) 2px;
 	margin-top:-2px;
 }
 
 .nav ul li img{
-	width: 25;
+	width: 30px;
 	height: 30px;
 	vertical-align: middle;
 }
 
-#inicio{width: 102px;}
-.stop{
+.iconInicio{
+	display: block;
+	position: absolute;
+	margin: 5px;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 20px solid white;
+}
+
+.special{
+	text-align: center;
+	width: 60px;
+	padding: 5px 10px 0 30px;
+}
+
+.stopAnimate{
+	animation:stop 0.2s ease forwards;
+}
+
+.initAnimate{
+	animation:init 0.5s ease forwards;
+}
+
+@keyframes stop {
+	100% {
+		border-top: 0;
+		border-bottom: 0;
+		border-left: 0;
+		width: 20px;
+		height: 20px;
+		background: white;
+	}
+}
+
+@keyframes init {
+	50% {
+		transform: scale(1.5);
+		border-left-color: rgba(151,187,205,1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+#inicio.stop{
+	width: 102px;
+	border-bottom: solid rgba(255,20,20,1) 2px;
+	background: rgba(255,20,20,0.2);
+}
+
+#inicio:active{
+	border-bottom: solid rgba(255,20,20,1) 2px;
+	background: rgba(255,20,20,0.2);
+}
+
+#inicio.stop:hover{
 	border-bottom: solid rgba(255,20,20,1) 2px;
 	background: rgba(255,20,20,0.2);
 }
@@ -164,7 +140,7 @@ button{outline:0
 	width: 65px;
 }
 
-.sendA{
+.send{
 	box-sizing: border-box;
 	height: 30px;
 	margin-top: 10px;
@@ -172,13 +148,13 @@ button{outline:0
 	border-bottom: solid rgba(0,0,0,1) 2px;
 }
 
-.sendA:hover{
+.send:hover{
 	border-bottom: solid rgba(140, 217, 32, 0.82) 2px;
 	background: rgba(130, 213, 46, 0.48);
 	margin-top: 8px;
 }
 
-.sendA span{
+.send span{
 	width: 80px;
 	text-align: center;
 	line-height: 15px;
@@ -188,10 +164,80 @@ button{outline:0
 /*Menu Lazo Cerrado*/
 .cerrado{
 	display: none;
+	box-sizing: border-box;
+	background: rgba(0,0,0,0.2);
+	width: 150px;
 }
 .lazoli{
 	width: 150px;
 }
+.giro{
+	animation:spin 0.4s linear;
+}
+
+@keyframes spin {
+	100% { transform:rotate(360deg); }
+}
+
+.cerrado label{
+	display: block;
+  padding: 5px;
+}
+.cerrado input{
+	border:none;
+	border-bottom: solid rgba(151,187,205,1) 2px;
+	background-color: rgba(0,0,0,0);
+	color:#fff;
+	font-family: 'Inconsolata';
+	font-size: 14px;
+	text-align: center;
+	display: block;
+	width: 150px;
+}
+
+.cerrado select{
+	border:none;
+	border-bottom: solid rgba(151,187,205,1) 2px;
+	background-color: rgba(0,0,0,0);
+	color:#fff;
+	font-family: 'Inconsolata';
+	font-size: 14px;
+	text-align: center;
+	display: block;
+	width: 150px;
+	appearance:none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+  cursor:pointer;
+	padding-right: 25px;
+	margin-left: -5px;
+	text-overflow: ellipsis;
+}
+
+.flecha{position:relative}
+
+.flecha:after {
+    content:'<>';
+    font:12px "Consolas", monospace;
+    color: rgba(151,187,205,1);
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:0px; top:2px;
+    padding:0 0 0px;
+    position:absolute;
+    pointer-events:none;
+}
+.flecha:before {
+    content:'';
+    right:0px; top:0px;
+    width:20px; height:20px;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+
 /*Leyenda*/
 ul{
 	list-style: none;
@@ -398,4 +444,17 @@ ul{
 .shadow-r {
   -webkit-animation: shadow-r-n .425s ease-in-out infinite alternate;
   animation: shadow-r-n .425s ease-in-out infinite alternate;
+}
+
+
+/*MODAL*/
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
 }
