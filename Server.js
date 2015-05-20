@@ -44,17 +44,18 @@ app.get('/', function(req, res){
 
 
 io.on('connection', function(socket){
-  socket.on('Cescalon', function(data){
-    console.info("Cambio en escalon " + data.escalon);
-    controlador.escalon = data.escalon;
-    if(data.metodo !== null){
+  socket.on('Creferencia', function(data){
+    console.info("Cambio en la referencia:" + data.referencia);
+      controlador.oLoop(data.referencia);
+    if(data.lazo =="cerrado"){
       console.info("Metodo:" + data.metodo);
+      controlador.cLoop(data.metodo,data.referencia);
     }
     //controlador.pwm();
   });
   socket.on('OrdenIni', function(){
-    d = new Date();
     if (controlador.renameData){
+      var d = new Date();
       controlador.fileName = "datos/"+d.getDate()+this.medicion +".txt";
     }else{
       controlador.fileName = "datos/BaseDatos.txt";

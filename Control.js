@@ -15,14 +15,25 @@ function controlador(config){
 //Local variables //
 ////////////////////
   var medPercent = 0;
+  var sumaError=0;
+  var de=0;
+  var limSup =30;
+  var limInf =-0.5;
+  this.td =0.39;
+  this.ti =0.411;
+  this.kc = 0.07;
   this.timeSend = 0;
   this.parseData = "";
-  this.escalon = 0;
+  this.m = 0;
+  this.error=[0,0];
+  this.referencia=0;
+  this.metodo;
   this.medicion = 0;
   this.fileName = "";
   this.toGraph = {};
   this.iteration = 0;
   this.writeTime = Math.round(config.writeTime/this.step)-1;
+  this.cerrado = false;
 ////////////
 //Metodos //
 ////////////
@@ -41,19 +52,40 @@ function controlador(config){
   this.tomaDato = function(callback){
       this.timeSend++;
       //medPercent = (analog.analogRead(5)*100)/4095;
-      //parseData += iteration + '\t ' + escalon + '\t ' + medPercent + '\n';
+      if(this.cerrado){
+        this.error[0] = this.error[1];
+        this.error[1] = this.referencia - medPercent;
+        this.de = (this.error[1]-this.error[0])/this.step;
+        this.sumaError += this.error[1];
+        this.m = this.kc*(this.error[1]+this.td*this.de + (1/this.ti)*this.sumaError*this.step);
+      }else{
+        this.m = this.referencia;
+      }
+      //this.parseData += iteration/(this.writeTime+1) + '\t ' iteration + '\t ' + this.m + '\t ' + medPercent + '\n';
       if (this.timeSend > this.writeTime) {
         this.escribir(this.fileName,this.parseData);
-        this.toGraph = {point : medPercent , pointE : this.escalon};
+        this.toGraph = {point : medPercent , pointE : this.referencia};
         callback();
         this.iteration += 1;
-        parseData = "";
+        this.parseData = "";
         this.timeSend = 0;
       }
   };
+  
+  this.cLoop = function(metodo,referencia){
+    this.cerrado = true;
+    this.metodo = metodo;
+    this.referencia = referencia;
+  };
+  
+  this.oLoop = function(referencia){
+    this.cerrado = false;
+    this.metodo = null;
+    this.referencia = referencia;
+  }
 
   this.pwm = function(){
-    this.escribir("/sys/devices/virtual/misc/pwmtimer/level/pwm5",Math.round(this.escalon*2));
+    this.escribir("/sys/devices/virtual/misc/pwmtimer/level/pwm5",Math.round(this.m*2));
   };
 
 }

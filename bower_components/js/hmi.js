@@ -31,7 +31,7 @@ $(window).load(function () {
   var data = {
     labels: labels,
     datasets: [{
-      label: "Escalon",
+      label: "referencia",
       fillColor: "rgba(255,20,20,0.2)",
       strokeColor: "rgba(255,20,20,1)",
       pointColor: "rgba(255,20,20,1)",
@@ -114,8 +114,8 @@ $(window).load(function () {
   $("#escalon").click(function (event) {
     var str = $(".abierto>input:text").val();
     if (validator(str)) {
-      socket.emit('Cescalon', {
-        escalon: str,
+      socket.emit('Creferencia', {
+        referencia: str,
         lazo: 'abierto',
         metodo: null
       });
@@ -124,11 +124,12 @@ $(window).load(function () {
   });
 
   $("#referencia").click(function (event) {
-    var str = $(".cerrado>input:text").val();
-    var metodo = $(".cerrado>select").val();
+    var str = $("#set").val();
+    var metodo = $("#metodo").val();
+    console.log(metodo);
     if (validator(str)) {
-      socket.emit('Cescalon', {
-        escalon: str,
+      socket.emit('Creferencia', {
+        referencia: str,
         lazo: 'cerrado',
         metodo: metodo
       });
