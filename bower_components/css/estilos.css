@@ -7,13 +7,17 @@ body{
 .nav {
 	position: absolute;
 	display: block;
-	width: 390px;
+	width: 420px;
+}
+
+#Graf{
+    width:30px;
 }
 
 .nav2 {
 	display: inline-block;
 	width: 150px;
-	margin-left: 390px;
+	margin-left: 420px;
 }
 
 .nav ul li{
@@ -42,6 +46,10 @@ body{
 	background: rgba(255,255,255,0.2);
 	border-bottom: solid rgba(255,255,255,1) 2px;
 	margin-top:-2px;
+}
+
+a, a:active, a:focus {
+	outline: none;
 }
 
 .nav ul li img{
@@ -251,7 +259,7 @@ ul{
 	vertical-align: top;
 	display: block;
 	float:right;
-	width: 530px;
+	width: 570px;
 	top: 12px;
 	right: 10px;
 }
@@ -447,14 +455,12 @@ ul{
 }
 
 
-/*MODAL*/
-#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
+optgroup[label="Sintonizacion"]::before{
+    background:#990033;
 }
+
+optgroup[label="Parametrizacion"]::before{
+    background:#336699;
+}
+
+

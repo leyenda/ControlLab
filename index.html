@@ -40,6 +40,11 @@
     <div class="nav">
       <ul>
         <li>
+          <a href="/grafica" id="Graf" class="funcion graf">
+            <i class="Graf">G</i>
+          </a>
+        </li>
+	<li>
           <a href="#" id="inicio" class="funcion inicio">
             <i class="iconInicio initAnimate"></i>
             <span class="special">Inicio</span>
@@ -62,8 +67,15 @@
             <label for="metodo">Metodo: </label>
             <label class="flecha">
             <select name="Metodo" id="metodo">
-            <option value="sintesis" selected>Sintesis Directa</option>
-            <option value="integral">Integral del Error</option>
+            <optgroup label="Sintonizacion">
+            <option value="k_ult" selected>K ultima</option>
+            <option value="integral">ITAE</option>
+            <option value="opt">Optimizacion</option>
+            </optgroup>
+            <optgroup label="Parametrizacion">
+            <option value="polos">Asig. Polos</option>
+            <option value="sintesis">Sintesis directa</option>
+            </optgroup>
             </select>
             </label>
             <label for="referencia">Referencia: </label>
@@ -98,11 +110,11 @@
           <div class="constantes">
             <ul>
               <li>Kc:
-                <span class="kc"></span>4.9845</li>
+                <span class="kc">NaN</span></li>
               <li>Ti:
-                <span class="ti"></span>1.6213</li>
+                <span class="ti">NaN</span></li>
               <li>Td:
-                <span class="td"></span>0.4268</li>
+                <span class="td">NaN</span></li>
             </ul>
           </div>
         </li>
@@ -113,10 +125,11 @@
   </div>
   <div style='display:none'>
 			<div id='inline_content' style='padding:10px; background:#fff;'>
-			<p>Aqui estara el formulario de configuraciion:</p>
+			<p>Aqui estara el formulario de configuracion:</p>
       <ul style="color:#000">
         <li>Tiempo de muestreo</li>
         <li>Tiempo de escritura</li>
+        <li>Saturacion Integral</li>
         <li>Renombrar Base de datos</li>
       </ul>
 			</div>

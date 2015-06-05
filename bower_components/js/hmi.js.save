@@ -18,7 +18,8 @@ $(window).load(function () {
 
 
   var npoints = 30;
-  var points = Array.apply(null, new Array(npoints)).map(Number.prototype.valueOf, 0);
+  var points = Array.apply(null, new Array(npoints)).map(Number.prototvar points = Array.apply(null, new Array(npoints)).map(Number.prototype.valueOf, 0);
+ype.valueOf, 0);
   var pointsE = Array.apply(null, new Array(npoints)).map(Number.prototype.valueOf, 0);
   var resetLabels = Array.apply(null, new Array(npoints)).map(function (x, y) {
     return (y - 29);
