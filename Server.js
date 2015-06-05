@@ -11,7 +11,7 @@ var fs = require('fs');
 var spawn = require('child_process').spawn;
 
 config = {
-  server_IP: "192.168.1.1",
+  server_IP: "192.168.1.100",
   step: 10,
   writeTime: 1000,
   renameData: true,

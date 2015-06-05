@@ -4,7 +4,7 @@
   "description": "Contrlador PID aplicado con PCduino3",
   "main": "server.js",
   "repository": "https://github.com/leyenda/ControlLab",
-  "author": "Daniel Jimenez y Geronimo Aristizabal",
+  "contributors": ["Daniel Jimenez G <danieljimenez92@gmail.com>","Geronimo Aristizabal D <geronimoaris@hotmail.com>"],
   "dependencies": {
     "add": "^2.0.6",
     "express": "^4.10.2",
