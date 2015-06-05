@@ -1,6 +1,6 @@
 var socket = io();
-socket.on('graficaLista',function(){
-	$('.wrapper').fadeOut(function(){
-		$('.grafica').fadeIn();
-	});
+socket.on('graficaLista', function () {
+  $('.wrapper').fadeOut(function () {
+    $('.grafica').fadeIn();
+  });
 });

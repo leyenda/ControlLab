@@ -1,2 +1,5 @@
 node_modules
 .tern-project
+bower_components/img/validated
+datos/*
+*.save

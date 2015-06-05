@@ -66,39 +66,39 @@ $(window).load(function () {
 
   var socket = io();
   var parametros = {
-    k_ult : [1.121, 0.36, 0.0577], //[Kc Ti Td]
-    integral : [0.07, 0.41, 0.39],
-    opt : [0.323, 0.41, 0.21],
-    polos : [7.405, 0.09617, 0.065],
-    sintesis : [0.6124, 0.35, 0.1052]
+    k_ult: [1.121, 0.36, 0.0577], //[Kc Ti Td]
+    integral: [0.07, 0.41, 0.39],
+    opt: [0.323, 0.41, 0.21],
+    polos: [7.405, 0.09617, 0.065],
+    sintesis: [0.6124, 0.35, 0.1052]
   };
 
-  $('#metodo').on('change',function(){
+  $('#metodo').on('change', function () {
     var metodo = $("#metodo").val();
-    var param = updateParams(metodo,parametros);
-    socket.emit('changeMetod',{
-        parametros: param,
+    var param = updateParams(metodo, parametros);
+    socket.emit('changeMetod', {
+      parametros: param,
     });
-  });    
-  
+  });
+
   $('#inicio').click(function (event) {
-    var state = $('#inicio>span').text();  
+    var state = $('#inicio>span').text();
     if (state == 'Inicio') {
-       event.preventDefault();
-       if($('.lazo').attr('name')=='cerrado'){
-       var metodo = $("#metodo").val();
-       var param = updateParams(metodo,parametros);
-           socket.emit('OrdenIni',{
-               metodo: metodo,
-               parametros: param,
-               lazo: 'cerrado'
-           });
-      }else{
-            socket.emit('OrdenIni',{
-               metodo: null,
-               parametros: null,
-               lazo: 'abierto'
-           });
+      event.preventDefault();
+      if ($('.lazo').attr('name') == 'cerrado') {
+        var metodo = $("#metodo").val();
+        var param = updateParams(metodo, parametros);
+        socket.emit('OrdenIni', {
+          metodo: metodo,
+          parametros: param,
+          lazo: 'cerrado'
+        });
+      } else {
+        socket.emit('OrdenIni', {
+          metodo: null,
+          parametros: null,
+          lazo: 'abierto'
+        });
       }
       myLineChart.scale.xLabels = resetLabels;
       $('#inicio>span').text('Parar');
@@ -164,7 +164,10 @@ $(window).load(function () {
     event.preventDefault();
   });
 
-  $(".inline").colorbox({inline:true, width:"50%"});
+  $(".inline").colorbox({
+    inline: true,
+    width: "50%"
+  });
 
   socket.on('puntos', function (data) {
     //data es un punto
@@ -185,12 +188,12 @@ $(window).load(function () {
 });
 
 
-function updateParams(metodo,parametros){
-    var param = parametros[metodo];
-    $('.kc').text(param[0].toPrecision(4));
-    $('.ti').text(param[1].toPrecision(4));
-    $('.td').text(param[2].toPrecision(4));
-    return param;
+function updateParams(metodo, parametros) {
+  var param = parametros[metodo];
+  $('.kc').text(param[0].toPrecision(4));
+  $('.ti').text(param[1].toPrecision(4));
+  $('.td').text(param[2].toPrecision(4));
+  return param;
 }
 
 function validator(str) {
@@ -205,12 +208,9 @@ function validator(str) {
 function notifyMe(txt) {
   if (!("Notification" in window)) {
     alert("This browser does not support desktop notification");
-  }
-  else if (Notification.permission === "granted") {
+  } else if (Notification.permission === "granted") {
     var notification = new Notification(txt);
-  }
-
-  else if (Notification.permission !== 'denied') {
+  } else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
       if (permission === "granted") {
         var notification = new Notification(txt);
