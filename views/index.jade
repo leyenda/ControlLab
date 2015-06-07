@@ -1,0 +1,10 @@
+html
+    head
+        title Graficas
+        link(href='../css/lista.css', rel='stylesheet')
+        link(href='http://fonts.googleapis.com/css?family=Inconsolata', rel='stylesheet', type='text/css')
+    body
+        ul
+            each val in data
+              li.metodo
+                a(href="grafica/"+val)=val
